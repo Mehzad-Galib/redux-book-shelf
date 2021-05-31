@@ -1,14 +1,20 @@
-import {ADD_BOOK_TO_READING_LIST, REMOVE_BOOKS_FROM_READING_LIST, FINISHED_BOOKS, REMOVE_FROM_ALL_BOOKS} from '../Action/bookAction';
-import books from '../../fakeData/books.json';
+import {ADD_BOOK_TO_READING_LIST, REMOVE_BOOKS_FROM_READING_LIST, FINISHED_BOOKS, REMOVE_FROM_ALL_BOOKS, LOAD_BOOKS} from '../Action/bookAction';
+// import books from '../../fakeData/books.json';
 
 const initialState = {
-    allBooks: books,
+    allBooks: [],
     reading: [],
     finishList: []
 }
 
 const bookReducer = (state=initialState, action)=>{
     switch(action.type){
+        case LOAD_BOOKS:{
+            const newState = {
+                ...state, allBooks: action.payload
+            }
+            return newState;
+        }
         case REMOVE_FROM_ALL_BOOKS:{
             const newState = {
                 ...state, allBooks: state.allBooks.filter(b => b.id !== action.payload.id)

@@ -3,6 +3,21 @@ export const REMOVE_FROM_ALL_BOOKS = 'REMOVE_FROM_ALL_BOOKS';
 export const ADD_BOOK_TO_READING_LIST = 'ADD_BOOK_TO_READING_LIST';
 export const REMOVE_BOOKS_FROM_READING_LIST = 'REMOVE_BOOKS_FROM_READING_LIST';
 export const FINISHED_BOOKS = 'FINISHED_BOOKS';
+export const LOAD_BOOKS = 'LOAD_BOOKS';
+
+export const loadBooks = (payload)=>{
+    return(dispatch, getState)=> {
+        fetch('https://redux-book-shelf.herokuapp.com/books')
+        .then(res=> res.json())
+        .then(data=> {
+            dispatch({
+                type: 'LOAD_BOOKS',
+                payload: data.data
+            })
+        })
+    }
+
+}
 
 export const allBooks = (payload) => {
     return {type: ALL_BOOKS, payload:payload}
